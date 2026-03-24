@@ -1,0 +1,22 @@
+# Mind-Match sample user dataset
+# Format: id,name,interest1;interest2;...
+0,Atishay,Python;ML;Graphs;Algorithms
+1,Sarthak,Graphs;C++;Algorithms;Competitive Programming
+2,Suhani,Python;Data Structures;ML;Databases
+3,Vinayak,C++;Systems;Algorithms;Compilers
+4,Ananya,Music;Photography;Writing;Reading
+5,Rohan,Music;Gaming;Writing;Photography
+6,Priya,Finance;Investing;Economics;Mathematics
+7,Arjun,Mathematics;Physics;Algorithms;Graph Theory
+8,Neha,Web Development;JavaScript;Frontend;Backend
+9,Karan,Backend;Databases;Cloud;DevOps
+10,Divya,Deep Learning;ML;Python;NLP
+11,Amit,NLP;Computer Vision;Deep Learning;Python
+12,Pooja,JavaScript;React;Frontend;Web Development
+13,Ravi,DevOps;Cloud;Docker;Kubernetes
+14,Sneha,Photography;Painting;Music;Art
+15,Vishal,Competitive Programming;C++;Algorithms;Mathematics
+16,Ishaan,Blockchain;Finance;Investing;Cryptography
+17,Nidhi,Data Structures;Graphs;Algorithms;Python
+18,Aditya,Physics;Mathematics;Quantum Computing;Research
+19,Kavya,Reading;Writing;Philosophy;Psychology
