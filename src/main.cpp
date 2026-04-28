@@ -40,6 +40,49 @@ timeAlgo(AlgoFn fn) {
     return {res, us};
 }
 
+// ─────────────────────────────────────────────────────────────
+// VALIDATION: Check if two SCC lists are equivalent
+// Two SCC lists match if they partition vertices identically
+// ─────────────────────────────────────────────────────────────
+bool validateSCCMatch(const std::vector<std::vector<int>>& sccs1,
+                      const std::vector<std::vector<int>>& sccs2,
+                      int vertexCount) {
+    // Quick check: same number of components
+    if (sccs1.size() != sccs2.size()) {
+        return false;
+    }
+
+    // Build membership maps: vertex → SCC index for each algorithm
+    std::vector<int> member1(vertexCount, -1);
+    std::vector<int> member2(vertexCount, -1);
+
+    for (size_t i = 0; i < sccs1.size(); i++) {
+        for (int v : sccs1[i]) {
+            member1[v] = static_cast<int>(i);
+        }
+    }
+
+    for (size_t i = 0; i < sccs2.size(); i++) {
+        for (int v : sccs2[i]) {
+            member2[v] = static_cast<int>(i);
+        }
+    }
+
+    // Check if every pair of vertices that are in same SCC in algo1
+    // are also in same SCC in algo2 (they partition identically)
+    for (int u = 0; u < vertexCount; u++) {
+        for (int v = u + 1; v < vertexCount; v++) {
+            bool sameIn1 = (member1[u] == member1[v]) && (member1[u] != -1);
+            bool sameIn2 = (member2[u] == member2[v]) && (member2[u] != -1);
+            if (sameIn1 != sameIn2) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 void printBenchmark(int V, int E, long long k_us, long long t_us,
                     int k_sccs, int t_sccs) {
     std::cout << "\n┌─────────────────────────────────────────────────┐\n";
@@ -126,16 +169,30 @@ int main(int argc, char* argv[]) {
     }
 
 
+    // Run Kosaraju's algorithm
     Kosaraju kosaraju;
     auto [k_sccs, k_us] = timeAlgo([&]{ return kosaraju.findSCCs(g); });
 
+    // Run Tarjan's algorithm
     Tarjan tarjan;
     auto [t_sccs, t_us] = timeAlgo([&]{ return tarjan.findSCCs(g); });
 
+    // ─────────────────────────────────────────────────────────────
+    // VALIDATION: Verify both algorithms produce identical SCCs
+    // ─────────────────────────────────────────────────────────────
+    bool sccsMatch = validateSCCMatch(k_sccs, t_sccs, g.V);
+    
+    if (!jsonMode && !sccsMatch) {
+        std::cerr << "\n⚠ WARNING: SCC mismatch between Kosaraju and Tarjan!\n";
+        std::cerr << "  Kosaraju SCCs: " << k_sccs.size() << "\n";
+        std::cerr << "  Tarjan SCCs:   " << t_sccs.size() << "\n";
+    }
+
+    // Use Kosaraju results as canonical
     auto communities = Analyzer::buildCommunities(k_sccs, g);
 
     if (jsonMode) {
-        std::cout << Analyzer::toJSON(communities, g, threshold, k_us, t_us);
+        std::cout << Analyzer::toJSON(communities, g, threshold, k_us, t_us, sccsMatch);
     } else {
         Analyzer::printReport(communities);
         printBenchmark(g.V, g.edgeCount(), k_us, t_us,
@@ -143,7 +200,7 @@ int main(int argc, char* argv[]) {
         std::cout << "\n[MindMatch] Done.\n\n";
 
         std::ofstream jf("ui/result.json");
-        jf << Analyzer::toJSON(communities, g, threshold, k_us, t_us);
+        jf << Analyzer::toJSON(communities, g, threshold, k_us, t_us, sccsMatch);
         std::cout << "[MindMatch] JSON result saved to ui/result.json\n";
     }
 

@@ -1,0 +1,15 @@
+# Build files
+build/
+*.exe
+*.out
+*.o
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db

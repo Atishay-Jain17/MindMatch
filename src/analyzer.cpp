@@ -91,18 +91,44 @@ std::string toJSON(const std::vector<Community>& communities,
                    const Graph& g,
                    double threshold,
                    long long kosaraju_us,
-                   long long tarjan_us)
+                   long long tarjan_us,
+                   bool validation)
 {
     std::ostringstream j;
     j << "{\n";
 
-    j << "  \"vertices\": " << g.V << ",\n";
-    j << "  \"edges\": "    << g.edgeCount() << ",\n";
-    j << "  \"threshold\": " << std::fixed << std::setprecision(3) << threshold << ",\n";
-    j << "  \"kosaraju_us\": " << kosaraju_us << ",\n";
-    j << "  \"tarjan_us\": "   << tarjan_us   << ",\n";
-    j << "  \"community_count\": " << communities.size() << ",\n";
+    // ── Metadata ──────────────────────────────────────────
+    j << "  \"meta\": {\n";
+    j << "    \"project\": \"Mind-Match\",\n";
+    j << "    \"description\": \"SCC-based community detection\",\n";
+    j << "    \"algorithm\": \"Kosaraju (canonical) + Tarjan (comparison)\",\n";
+    j << "    \"validation_passed\": " << (validation ? "true" : "false") << ",\n";
+    j << "    \"version\": \"1.0\"\n";
+    j << "  },\n";
 
+    // ── Graph metrics ─────────────────────────────────────
+    j << "  \"metrics\": {\n";
+    j << "    \"vertices\": " << g.V << ",\n";
+    j << "    \"edges\": " << g.edgeCount() << ",\n";
+    j << "    \"threshold\": " << std::fixed << std::setprecision(3) << threshold << ",\n";
+    j << "    \"community_count\": " << communities.size() << ",\n";
+    j << "    \"avg_community_size\": " << std::fixed << std::setprecision(2) 
+      << (communities.empty() ? 0.0 : (double)g.V / communities.size()) << ",\n";
+    j << "    \"isolated_users\": " << (g.edgeCount() == 0 ? g.V : 0) << "\n";
+    j << "  },\n";
+
+    // ── Algorithm timings ─────────────────────────────────
+    j << "  \"timings_microseconds\": {\n";
+    j << "    \"kosaraju_us\": " << kosaraju_us << ",\n";
+    j << "    \"tarjan_us\": " << tarjan_us << ",\n";
+    long long faster_us = std::min(kosaraju_us, tarjan_us);
+    long long slower_us = std::max(kosaraju_us, tarjan_us);
+    double speedup = (slower_us > 0) ? (double)slower_us / faster_us : 1.0;
+    j << "    \"speedup_ratio\": " << std::fixed << std::setprecision(2) << speedup << ",\n";
+    j << "    \"faster_algorithm\": \"" << (kosaraju_us < tarjan_us ? "Kosaraju" : "Tarjan") << "\"\n";
+    j << "  },\n";
+
+    // ── Users ────────────────────────────────────────────
     j << "  \"users\": [\n";
     for (int i = 0; i < (int)g.users.size(); i++) {
         auto& u = g.users[i];
@@ -121,6 +147,7 @@ std::string toJSON(const std::vector<Community>& communities,
     }
     j << "  ],\n";
 
+    // ── Edges ────────────────────────────────────────────
     j << "  \"edges_list\": [\n";
     bool firstEdge = true;
     for (int u = 0; u < g.V; u++) {
@@ -132,13 +159,36 @@ std::string toJSON(const std::vector<Community>& communities,
     }
     j << "\n  ],\n";
 
+    // ── Communities ──────────────────────────────────────
     j << "  \"communities\": [\n";
     for (int ci = 0; ci < (int)communities.size(); ci++) {
         auto& c = communities[ci];
+        
+        // Calculate additional community stats
+        int internal_edges = 0;
+        std::set<int> memberSet(c.members.begin(), c.members.end());
+        std::set<std::string> interest_tags;
+        
+        for (int vid : c.members) {
+            if (vid < (int)g.adj.size()) {
+                for (int nb : g.adj[vid]) {
+                    if (memberSet.count(nb)) internal_edges++;
+                }
+            }
+            if (vid < (int)g.users.size()) {
+                for (auto& tag : g.users[vid].interests) {
+                    interest_tags.insert(tag);
+                }
+            }
+        }
+        
         j << "    {\n";
         j << "      \"id\": " << c.id << ",\n";
+        j << "      \"size\": " << c.members.size() << ",\n";
         j << "      \"dominant_interest\": \"" << escapeJSON(c.dominantInterest) << "\",\n";
         j << "      \"density\": " << std::fixed << std::setprecision(4) << c.density << ",\n";
+        j << "      \"internal_edges\": " << internal_edges << ",\n";
+        j << "      \"unique_interests\": " << interest_tags.size() << ",\n";
         j << "      \"members\": [";
         for (int mi = 0; mi < (int)c.members.size(); mi++) {
             if (mi > 0) j << ", ";

@@ -25,9 +25,11 @@ namespace Analyzer {
     void printReport(const std::vector<Community>& communities);
 
     // Export to JSON string (for the UI)
+    // validation: true if Kosaraju and Tarjan produced identical SCCs
     std::string toJSON(const std::vector<Community>& communities,
                        const Graph& g,
                        double threshold,
                        long long kosaraju_us,
-                       long long tarjan_us);
+                       long long tarjan_us,
+                       bool validation = true);
 }

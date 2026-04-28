@@ -1,1034 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mind-Match — SCC Community Detection</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<style>
-/* ── Reset & Base ─────────────────────────────────────────── */
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:    #0d1b2a;
-  --navy2:   #1a2e45;
-  --navy3:   #0f2740;
-  --teal:    #0d9488;
-  --teal2:   #14b8a6;
-  --mint:    #ccfbf1;
-  --white:   #ffffff;
-  --off:     #f0f4f8;
-  --gray:    #64748b;
-  --gray2:   #94a3b8;
-  --gray3:   #cbd5e1;
-  --dark:    #0f172a;
-  --accent:  #6366f1;
-  --warn:    #f59e0b;
-  --red:     #ef4444;
-  --green:   #22c55e;
-  --card-bg: #ffffff;
-  --border:  #e2e8f0;
-  --shadow:  0 2px 12px rgba(0,0,0,.08);
-  --shadow2: 0 4px 24px rgba(0,0,0,.13);
-}
-
-body{
-  font-family:'Segoe UI',system-ui,sans-serif;
-  background:var(--off);
-  color:var(--dark);
-  min-height:100vh;
-}
-
-/* ── Top Nav ──────────────────────────────────────────────── */
-header{
-  background:var(--navy);
-  padding:0 2rem;
-  height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-  box-shadow:0 2px 16px rgba(0,0,0,.3);
-}
-.logo{display:flex;align-items:center;gap:.7rem}
-.logo-dot{
-  width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,var(--teal),var(--accent));
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:900;color:#fff;
-}
-.logo-text{font-size:1.15rem;font-weight:700;color:#fff;letter-spacing:.5px}
-.logo-sub{font-size:.7rem;color:var(--teal2);margin-top:1px}
-.nav-badge{
-  background:var(--teal);color:#fff;
-  font-size:.72rem;font-weight:600;
-  padding:.25rem .7rem;border-radius:20px;letter-spacing:.5px;
-}
-
-/* ── Layout ───────────────────────────────────────────────── */
-.app{display:grid;grid-template-columns:300px 1fr;grid-template-rows:auto 1fr;gap:0;min-height:calc(100vh - 60px)}
-
-/* ── Sidebar ──────────────────────────────────────────────── */
-aside{
-  background:var(--white);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  overflow-y:auto;
-  grid-row:1/3;
-}
-.sidebar-section{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border)}
-.sidebar-title{
-  font-size:.72rem;font-weight:700;
-  letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--gray);margin-bottom:.9rem;
-}
-
-/* Controls */
-.control-group{margin-bottom:.9rem}
-.control-group label{
-  display:block;font-size:.8rem;font-weight:600;
-  color:var(--dark);margin-bottom:.35rem;
-}
-.control-group input[type=range]{width:100%;accent-color:var(--teal)}
-.control-group .range-val{
-  font-size:.75rem;color:var(--teal);font-weight:700;
-  float:right;margin-top:-1.1rem;
-}
-select,input[type=number]{
-  width:100%;padding:.4rem .6rem;border:1px solid var(--border);
-  border-radius:6px;font-size:.82rem;background:#fff;color:var(--dark);
-  outline:none;
-}
-select:focus,input:focus{border-color:var(--teal)}
-
-.btn{
-  display:block;width:100%;padding:.55rem;
-  background:var(--teal);color:#fff;border:none;border-radius:8px;
-  font-size:.85rem;font-weight:600;cursor:pointer;
-  transition:background .15s,transform .1s;
-}
-.btn:hover{background:var(--teal2)}
-.btn:active{transform:scale(.98)}
-.btn.secondary{background:var(--navy2);margin-top:.5rem}
-.btn.secondary:hover{background:var(--navy)}
-.btn.danger{background:var(--red);margin-top:.5rem}
-
-/* Upload */
-.upload-zone{
-  border:2px dashed var(--teal);border-radius:8px;
-  padding:1rem;text-align:center;cursor:pointer;
-  transition:background .15s;
-}
-.upload-zone:hover{background:var(--mint)}
-.upload-zone p{font-size:.78rem;color:var(--gray);margin-top:.3rem}
-#file-input{display:none}
-
-/* Stats */
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--border)}
-.stat-row:last-child{border:none}
-.stat-label{font-size:.78rem;color:var(--gray)}
-.stat-val{font-size:.9rem;font-weight:700;color:var(--teal)}
-
-/* Community list */
-.comm-item{
-  padding:.6rem .8rem;border-radius:8px;margin-bottom:.5rem;
-  border:2px solid transparent;cursor:pointer;
-  transition:border-color .15s,background .15s;
-  background:var(--off);
-}
-.comm-item:hover{border-color:var(--teal2);background:#f0fdfb}
-.comm-item.active{border-color:var(--teal);background:var(--mint)}
-.comm-item-header{display:flex;justify-content:space-between;align-items:center}
-.comm-name{font-size:.82rem;font-weight:700;color:var(--dark)}
-.comm-badge{
-  font-size:.68rem;padding:.15rem .5rem;border-radius:10px;
-  font-weight:600;color:#fff;
-}
-.comm-tag{font-size:.73rem;color:var(--gray);margin-top:.2rem}
-.comm-members{font-size:.72rem;color:var(--gray2);margin-top:.15rem}
-
-/* ── Main area ────────────────────────────────────────────── */
-main{display:flex;flex-direction:column;overflow:hidden}
-
-/* ── Tabs ─────────────────────────────────────────────────── */
-.tabs{
-  display:flex;border-bottom:1px solid var(--border);
-  background:#fff;padding:0 1.5rem;
-}
-.tab{
-  padding:.75rem 1.2rem;font-size:.85rem;font-weight:600;
-  color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;
-  transition:color .15s,border-color .15s;
-  display:flex;align-items:center;gap:.4rem;
-}
-.tab:hover{color:var(--teal)}
-.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
-.tab-icon{font-size:1rem}
-
-/* ── Tab panels ───────────────────────────────────────────── */
-.panel{display:none;flex:1;overflow:hidden}
-.panel.active{display:flex;flex-direction:column}
-
-/* ── Graph panel ──────────────────────────────────────────── */
-#panel-graph{position:relative}
-#graph-svg{width:100%;height:100%;background:var(--navy)}
-.graph-legend{
-  position:absolute;bottom:1rem;right:1rem;
-  background:rgba(13,27,42,.9);border:1px solid rgba(255,255,255,.1);
-  border-radius:8px;padding:.7rem 1rem;
-}
-.legend-title{font-size:.7rem;color:var(--gray2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.5rem}
-.legend-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem;font-size:.73rem;color:#ccc}
-.legend-dot{width:10px;height:10px;border-radius:50%}
-
-/* ── Table panel ──────────────────────────────────────────── */
-#panel-table{overflow-y:auto;padding:1.5rem}
-.table-wrap{background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
-table{width:100%;border-collapse:collapse;font-size:.82rem}
-thead tr{background:var(--navy);color:#fff}
-th{padding:.75rem 1rem;text-align:left;font-weight:600;font-size:.78rem;letter-spacing:.5px}
-tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-tbody tr:hover{background:var(--off)}
-td{padding:.65rem 1rem;vertical-align:middle}
-.tag-pill{
-  display:inline-block;background:var(--mint);color:var(--teal);
-  font-size:.68rem;font-weight:600;padding:.15rem .5rem;
-  border-radius:10px;margin:1px;
-}
-
-/* ── Benchmark panel ──────────────────────────────────────── */
-#panel-bench{overflow-y:auto;padding:1.5rem}
-.bench-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-.bench-card{
-  background:#fff;border-radius:12px;padding:1.4rem;
-  box-shadow:var(--shadow);border-top:4px solid var(--teal);
-}
-.bench-card.tarjan{border-top-color:var(--accent)}
-.bench-card-title{font-size:.8rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1rem}
-.bench-metric{margin-bottom:.8rem}
-.bench-metric-label{font-size:.75rem;color:var(--gray);margin-bottom:.25rem}
-.bench-metric-val{font-size:1.6rem;font-weight:800;color:var(--teal)}
-.bench-card.tarjan .bench-metric-val{color:var(--accent)}
-.bench-metric-unit{font-size:.72rem;color:var(--gray2);margin-left:.2rem}
-
-.bar-chart-wrap{background:#fff;border-radius:12px;padding:1.4rem;box-shadow:var(--shadow);margin-bottom:1rem}
-.bar-title{font-size:.82rem;font-weight:700;color:var(--dark);margin-bottom:1rem}
-.bar-row{margin-bottom:.9rem}
-.bar-label{font-size:.75rem;color:var(--gray);margin-bottom:.3rem;display:flex;justify-content:space-between}
-.bar-track{height:22px;background:var(--border);border-radius:4px;overflow:hidden;position:relative}
-.bar-fill{height:100%;border-radius:4px;transition:width 1s ease;display:flex;align-items:center;padding-left:.5rem}
-.bar-fill span{font-size:.68rem;font-weight:700;color:#fff}
-
-.scc-dist-wrap{background:#fff;border-radius:12px;padding:1.4rem;box-shadow:var(--shadow)}
-.scc-dist-title{font-size:.82rem;font-weight:700;color:var(--dark);margin-bottom:1rem}
-#scc-dist-svg{width:100%;height:200px}
-
-/* ── Detail panel ─────────────────────────────────────────── */
-#panel-detail{overflow-y:auto;padding:1.5rem}
-.detail-header{
-  background:var(--navy);color:#fff;border-radius:12px;
-  padding:1.4rem 1.6rem;margin-bottom:1rem;
-}
-.detail-title{font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
-.detail-sub{font-size:.82rem;color:var(--teal2)}
-.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem}
-.detail-stat{
-  background:#fff;border-radius:10px;padding:1rem;
-  box-shadow:var(--shadow);text-align:center;
-}
-.detail-stat-val{font-size:1.4rem;font-weight:800;color:var(--teal)}
-.detail-stat-label{font-size:.73rem;color:var(--gray);margin-top:.2rem}
-.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem}
-.member-card{
-  background:#fff;border-radius:10px;padding:.9rem;
-  box-shadow:var(--shadow);border-left:4px solid var(--teal);
-}
-.member-name{font-size:.85rem;font-weight:700;color:var(--dark)}
-.member-id{font-size:.7rem;color:var(--gray2)}
-.member-interests{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:2px}
-
-/* ── Empty / Loading ──────────────────────────────────────── */
-.empty{
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;height:100%;color:var(--gray2);
-  gap:.7rem;padding:2rem;text-align:center;
-}
-.empty-icon{font-size:3rem}
-.empty h3{font-size:1rem;color:var(--gray)}
-.empty p{font-size:.82rem;max-width:300px}
-
-/* ── Toast ────────────────────────────────────────────────── */
-#toast{
-  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);
-  background:var(--navy);color:#fff;padding:.6rem 1.4rem;
-  border-radius:20px;font-size:.82rem;font-weight:600;
-  box-shadow:var(--shadow2);opacity:0;
-  transition:opacity .3s;pointer-events:none;z-index:999;
-}
-#toast.show{opacity:1}
-
-/* ── Scrollbar ────────────────────────────────────────────── */
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:var(--gray3);border-radius:3px}
-
-/* ── Tooltip ──────────────────────────────────────────────── */
-.tooltip{
-  position:absolute;background:rgba(13,27,42,.92);color:#fff;
-  padding:.4rem .7rem;border-radius:6px;font-size:.75rem;
-  pointer-events:none;z-index:200;white-space:nowrap;
-  box-shadow:var(--shadow2);
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Mind-Match: SCC-based community detection and real-time graph visualization platform">
+  <title>Mind-Match</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
-<!-- ── Header ─────────────────────────────────────────────── -->
-<header>
-  <div class="logo">
-    <div class="logo-dot">M</div>
-    <div>
-      <div class="logo-text">Mind-Match</div>
-      <div class="logo-sub">SCC Community Detection · TCS-409 · DataStellar</div>
-    </div>
+<!-- ═══ TOP BAR ═══ -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-mark"></div>
+    <span>Mind-Match</span>
   </div>
-  <div class="nav-badge">DAA-IV-T151</div>
+  <nav class="topbar-nav" id="topNav">
+    <button class="active" data-action="graph">Graph</button>
+    <button data-action="adduser">Add User</button>
+    <button data-action="intelligence">Intelligence</button>
+    <button data-action="analytics">Analytics</button>
+    <button data-action="crosschat">Cross-Chat</button>
+    <button data-action="recompute">Recompute SCC</button>
+  </nav>
+  <div class="topbar-status">
+    <div class="status-badge"><span class="dot"></span> Engine Online</div>
+    <div class="status-badge" id="statusUsers">— users</div>
+    <div class="status-badge" id="statusEdges">— edges</div>
+    <div class="status-badge" id="statusComm">— communities</div>
+    <div class="status-badge" id="statusDensity">— density</div>
+  </div>
 </header>
 
-<div class="app">
+<!-- ═══ MAIN ═══ -->
+<div class="app-main">
 
-  <!-- ── Sidebar ──────────────────────────────────────────── -->
-  <aside>
+  <!-- LEFT: Graph -->
+  <div class="graph-area" id="graphArea">
+    <svg id="graphSvg"></svg>
 
-    <!-- Upload -->
-    <div class="sidebar-section">
-      <div class="sidebar-title">Data Source</div>
-      <label class="upload-zone" for="file-input">
-        <div style="font-size:1.5rem">📂</div>
-        <strong style="font-size:.82rem">Upload JSON result</strong>
-        <p>Drop the result.json from ./mindmatch --json</p>
-      </label>
-      <input type="file" id="file-input" accept=".json"/>
-      <button class="btn secondary" id="load-demo-btn" style="margin-top:.6rem">▶ Load Built-in Demo</button>
+    <!-- HUD bottom-left -->
+    <div class="graph-hud">
+      <div class="hud-legend" id="graphLegend"></div>
+      <div class="hud-metrics" id="graphMetrics"></div>
     </div>
 
-    <!-- Graph Controls -->
-    <div class="sidebar-section">
-      <div class="sidebar-title">Graph Controls</div>
-      <div class="control-group">
-        <label>Similarity Threshold <span class="range-val" id="thresh-display">0.30</span></label>
-        <input type="range" id="thresh-slider" min="0.05" max="0.9" step="0.05" value="0.30"/>
+    <!-- Toolbar top-right -->
+    <div class="graph-toolbar">
+      <button onclick="Graph.zoomFit()">Fit</button>
+      <button onclick="Graph.resetHighlight()">Reset</button>
+      <button onclick="Graph.loadData()">Refresh</button>
+    </div>
+
+    <!-- Simulation bar bottom-right -->
+    <div class="sim-bar" id="simBar">
+      <div class="sim-group">
+        <span class="sim-label">Add</span>
+        <button class="sim-btn add" onclick="App.simulate('add',10)">+10</button>
+        <button class="sim-btn add" onclick="App.simulate('add',50)">+50</button>
+        <button class="sim-btn add" onclick="App.simulate('add',100)">+100</button>
       </div>
-      <div class="control-group">
-        <label>Layout</label>
-        <select id="layout-select">
-          <option value="force">Force-Directed</option>
-          <option value="circle">Circular</option>
-          <option value="cluster">Cluster</option>
-        </select>
+      <div class="sim-group">
+        <span class="sim-label">Remove</span>
+        <button class="sim-btn rm" onclick="App.simulate('remove',10)">−10</button>
+        <button class="sim-btn rm" onclick="App.simulate('remove',50)">−50</button>
+        <button class="sim-btn rm" onclick="App.simulate('remove',100)">−100</button>
       </div>
-      <div class="control-group">
-        <label>Show edge labels</label>
-        <select id="edge-labels">
-          <option value="0">Off</option>
-          <option value="1">On</option>
-        </select>
+      <div class="sim-divider"></div>
+      <button class="sim-btn evo" id="evoBtn" onclick="App.toggleEvolution()">▶ Start Sim</button>
+      <div id="evoIndicator" class="evo-indicator" style="display:none">
+        <span class="evo-pulse"></span> Simulating...
       </div>
-      <button class="btn" id="apply-btn">Apply &amp; Rebuild Graph</button>
     </div>
 
-    <!-- Stats -->
-    <div class="sidebar-section">
-      <div class="sidebar-title">Graph Stats</div>
-      <div class="stat-row"><span class="stat-label">Vertices (V)</span><span class="stat-val" id="stat-v">—</span></div>
-      <div class="stat-row"><span class="stat-label">Edges (E)</span><span class="stat-val" id="stat-e">—</span></div>
-      <div class="stat-row"><span class="stat-label">Communities</span><span class="stat-val" id="stat-c">—</span></div>
-      <div class="stat-row"><span class="stat-label">Threshold</span><span class="stat-val" id="stat-t">—</span></div>
-      <div class="stat-row"><span class="stat-label">Kosaraju (µs)</span><span class="stat-val" id="stat-k">—</span></div>
-      <div class="stat-row"><span class="stat-label">Tarjan (µs)</span><span class="stat-val" id="stat-tj">—</span></div>
-    </div>
+    <!-- Event log -->
+    <div class="event-log" id="eventLog"></div>
+  </div>
 
-    <!-- Communities list -->
-    <div class="sidebar-section" style="flex:1">
-      <div class="sidebar-title">Detected Communities</div>
-      <div id="comm-list"></div>
+  <!-- RIGHT: Panel -->
+  <aside class="right-panel" id="rightPanel">
+    <div class="panel-tabs" id="panelTabs">
+      <button class="panel-tab active" data-tab="info">Info</button>
+      <button class="panel-tab" data-tab="community">Community</button>
+      <button class="panel-tab" data-tab="chat">Chat</button>
     </div>
-
+    <div class="panel-content" id="panelContent">
+      <div class="panel-view active" id="tab-info">
+        <div style="text-align:center;padding:40px 0;color:var(--text-sec)">
+          <div style="font-size:24px;margin-bottom:8px;opacity:0.4">⬤</div>
+          <p style="font-size:12px">Click a node in the graph<br>to view details</p>
+        </div>
+      </div>
+      <div class="panel-view" id="tab-community"></div>
+      <div class="panel-view" id="tab-chat"></div>
+    </div>
   </aside>
-
-  <!-- ── Main ─────────────────────────────────────────────── -->
-  <main>
-    <div class="tabs">
-      <div class="tab active" data-tab="graph"><span class="tab-icon">🕸</span> Graph</div>
-      <div class="tab" data-tab="table"><span class="tab-icon">📋</span> Users</div>
-      <div class="tab" data-tab="bench"><span class="tab-icon">⚡</span> Benchmark</div>
-      <div class="tab" data-tab="detail"><span class="tab-icon">🔍</span> Community Detail</div>
-    </div>
-
-    <!-- Graph panel -->
-    <div class="panel active" id="panel-graph">
-      <div class="empty" id="graph-empty">
-        <div class="empty-icon">🕸</div>
-        <h3>No data loaded</h3>
-        <p>Upload a result.json from the C++ backend or click <strong>Load Built-in Demo</strong></p>
-      </div>
-      <svg id="graph-svg" style="display:none"></svg>
-      <div class="graph-legend" id="graph-legend" style="display:none">
-        <div class="legend-title">Legend</div>
-        <div id="legend-items"></div>
-        <div class="legend-row" style="margin-top:.5rem">
-          <svg width="30" height="12"><line x1="0" y1="6" x2="30" y2="6" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr)"/></svg>
-          Directed edge
-        </div>
-      </div>
-    </div>
-
-    <!-- Table panel -->
-    <div class="panel" id="panel-table">
-      <div class="empty" id="table-empty">
-        <div class="empty-icon">📋</div>
-        <h3>No data loaded</h3>
-        <p>Load a dataset to see the user table</p>
-      </div>
-      <div id="table-content" style="display:none" class="panel active">
-        <div style="padding:1.5rem">
-          <div class="table-wrap">
-            <table>
-              <thead><tr>
-                <th>#</th><th>Name</th><th>Community</th><th>Interests</th><th>Degree Out</th>
-              </tr></thead>
-              <tbody id="user-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Benchmark panel -->
-    <div class="panel" id="panel-bench">
-      <div class="empty" id="bench-empty">
-        <div class="empty-icon">⚡</div>
-        <h3>No data loaded</h3>
-        <p>Load a dataset to see algorithm benchmarks</p>
-      </div>
-      <div id="bench-content" style="display:none;padding:1.5rem;overflow-y:auto">
-
-        <div class="bench-grid">
-          <div class="bench-card">
-            <div class="bench-card-title">🔵 Kosaraju's Algorithm</div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Execution Time</div>
-              <div><span class="bench-metric-val" id="k-time">—</span><span class="bench-metric-unit">µs</span></div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">DFS Passes</div>
-              <div class="bench-metric-val" style="font-size:1.1rem">2 passes</div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Space (extra)</div>
-              <div class="bench-metric-val" style="font-size:1.1rem">O(V) stack</div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Complexity</div>
-              <div class="bench-metric-val" style="font-size:1.1rem">O(V + E)</div>
-            </div>
-            <div style="font-size:.75rem;color:var(--gray);margin-top:.5rem;line-height:1.5">
-              Two-pass DFS: first pass records finish times; second pass on transposed graph extracts SCCs.
-            </div>
-          </div>
-          <div class="bench-card tarjan">
-            <div class="bench-card-title">🟣 Tarjan's Algorithm</div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Execution Time</div>
-              <div><span class="bench-metric-val" id="t-time">—</span><span class="bench-metric-unit">µs</span></div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">DFS Passes</div>
-              <div class="bench-metric-val" style="font-size:1.1rem;color:var(--accent)">1 pass</div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Space (extra)</div>
-              <div class="bench-metric-val" style="font-size:1.1rem;color:var(--accent)">O(V) + low[]</div>
-            </div>
-            <div class="bench-metric">
-              <div class="bench-metric-label">Complexity</div>
-              <div class="bench-metric-val" style="font-size:1.1rem;color:var(--accent)">O(V + E)</div>
-            </div>
-            <div style="font-size:.75rem;color:var(--gray);margin-top:.5rem;line-height:1.5">
-              Single DFS with low-link values. An SCC root is detected when disc[v] == low[v].
-            </div>
-          </div>
-        </div>
-
-        <div class="bar-chart-wrap">
-          <div class="bar-title">Execution Time Comparison</div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Kosaraju</span><span id="k-bar-val">—</span></div>
-            <div class="bar-track"><div class="bar-fill" id="k-bar" style="background:var(--teal);width:0%"><span></span></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Tarjan</span><span id="t-bar-val">—</span></div>
-            <div class="bar-track"><div class="bar-fill" id="t-bar" style="background:var(--accent);width:0%"><span></span></div></div>
-          </div>
-        </div>
-
-        <div class="scc-dist-wrap">
-          <div class="scc-dist-title">SCC Size Distribution</div>
-          <svg id="scc-dist-svg"></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detail panel -->
-    <div class="panel" id="panel-detail">
-      <div class="empty" id="detail-empty">
-        <div class="empty-icon">🔍</div>
-        <h3>No community selected</h3>
-        <p>Click a community in the sidebar or a node in the graph to inspect it</p>
-      </div>
-      <div id="detail-content" style="display:none;padding:1.5rem;overflow-y:auto"></div>
-    </div>
-
-  </main>
 </div>
 
-<div id="toast"></div>
-<div class="tooltip" id="tooltip" style="display:none"></div>
+<!-- ═══ OVERLAY: Add User ═══ -->
+<div class="overlay-panel" id="overlayAddUser">
+  <div class="overlay-box">
+    <button class="overlay-close" onclick="App.closeOverlay('overlayAddUser')">✕</button>
+    <div id="addUserBody"></div>
+  </div>
+</div>
 
-<script>
-// ══════════════════════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════════════════════
-let state = {
-  data: null,           // parsed result.json
-  selectedComm: null,   // selected community id
-  threshold: 0.30,
-};
+<!-- ═══ OVERLAY: Analytics ═══ -->
+<div class="overlay-panel" id="overlayAnalytics">
+  <div class="overlay-box" style="width:640px">
+    <button class="overlay-close" onclick="App.closeOverlay('overlayAnalytics')">✕</button>
+    <div id="analyticsBody"></div>
+  </div>
+</div>
 
-// Palette for communities
-const PALETTE = [
-  '#0d9488','#6366f1','#f59e0b','#ef4444','#22c55e',
-  '#3b82f6','#ec4899','#8b5cf6','#14b8a6','#f97316',
-  '#84cc16','#06b6d4','#a855f7','#e11d48','#0ea5e9',
-];
-function commColor(id){ return PALETTE[id % PALETTE.length]; }
+<!-- ═══ OVERLAY: Intelligence ═══ -->
+<div class="overlay-panel" id="overlayIntelligence">
+  <div class="overlay-box" style="width:580px">
+    <button class="overlay-close" onclick="App.closeOverlay('overlayIntelligence')">✕</button>
+    <div id="intelligenceBody"></div>
+  </div>
+</div>
 
-// ══════════════════════════════════════════════════════════════
-//  BUILT-IN DEMO DATA  (matches our sample.csv at threshold 0.30)
-// ══════════════════════════════════════════════════════════════
-const DEMO_DATA = {"vertices":20,"edges":40,"threshold":0.3,"kosaraju_us":3,"tarjan_us":6,"community_count":5,"users":[{"id":0,"name":"Atishay","interests":["Algorithms","Graphs","ML","Python"]},{"id":1,"name":"Sarthak","interests":["Algorithms","C++","Competitive Programming","Graphs"]},{"id":2,"name":"Suhani","interests":["Data Structures","Databases","ML","Python"]},{"id":3,"name":"Vinayak","interests":["Algorithms","C++","Compilers","Systems"]},{"id":4,"name":"Ananya","interests":["Music","Photography","Reading","Writing"]},{"id":5,"name":"Rohan","interests":["Gaming","Music","Photography","Writing"]},{"id":6,"name":"Priya","interests":["Economics","Finance","Investing","Mathematics"]},{"id":7,"name":"Arjun","interests":["Algorithms","Graph Theory","Mathematics","Physics"]},{"id":8,"name":"Neha","interests":["Backend","Frontend","JavaScript","Web Development"]},{"id":9,"name":"Karan","interests":["Backend","Cloud","Databases","DevOps"]},{"id":10,"name":"Divya","interests":["Deep Learning","ML","NLP","Python"]},{"id":11,"name":"Amit","interests":["Computer Vision","Deep Learning","NLP","Python"]},{"id":12,"name":"Pooja","interests":["Frontend","JavaScript","React","Web Development"]},{"id":13,"name":"Ravi","interests":["Cloud","DevOps","Docker","Kubernetes"]},{"id":14,"name":"Sneha","interests":["Art","Music","Painting","Photography"]},{"id":15,"name":"Vishal","interests":["Algorithms","C++","Competitive Programming","Mathematics"]},{"id":16,"name":"Ishaan","interests":["Blockchain","Cryptography","Finance","Investing"]},{"id":17,"name":"Nidhi","interests":["Algorithms","Data Structures","Graphs","Python"]},{"id":18,"name":"Aditya","interests":["Mathematics","Physics","Quantum Computing","Research"]},{"id":19,"name":"Kavya","interests":["Philosophy","Psychology","Reading","Writing"]}],"edges_list":[{"from":0,"to":1},{"from":0,"to":2},{"from":0,"to":10},{"from":0,"to":17},{"from":1,"to":0},{"from":1,"to":3},{"from":1,"to":15},{"from":1,"to":17},{"from":2,"to":0},{"from":2,"to":10},{"from":2,"to":17},{"from":3,"to":1},{"from":3,"to":15},{"from":4,"to":5},{"from":4,"to":14},{"from":4,"to":19},{"from":5,"to":4},{"from":5,"to":14},{"from":6,"to":16},{"from":7,"to":15},{"from":7,"to":18},{"from":8,"to":12},{"from":9,"to":13},{"from":10,"to":0},{"from":10,"to":2},{"from":10,"to":11},{"from":11,"to":10},{"from":12,"to":8},{"from":13,"to":9},{"from":14,"to":4},{"from":14,"to":5},{"from":15,"to":1},{"from":15,"to":3},{"from":15,"to":7},{"from":16,"to":6},{"from":17,"to":0},{"from":17,"to":2},{"from":18,"to":7},{"from":19,"to":4},{"from":19,"to":5}],"communities":[{"id":0,"dominant_interest":"Cloud","density":1.0,"members":[9,13],"names":["Karan","Ravi"]},{"id":1,"dominant_interest":"JavaScript","density":1.0,"members":[8,12],"names":["Neha","Pooja"]},{"id":2,"dominant_interest":"Finance","density":1.0,"members":[6,16],"names":["Priya","Ishaan"]},{"id":3,"dominant_interest":"Music","density":0.6667,"members":[4,5,14,19],"names":["Ananya","Rohan","Sneha","Kavya"]},{"id":4,"dominant_interest":"Python","density":0.4286,"members":[0,1,2,3,7,10,11,15,17,18],"names":["Atishay","Sarthak","Suhani","Vinayak","Arjun","Divya","Amit","Vishal","Nidhi","Aditya"]}]};
+<!-- ═══ OVERLAY: Cross-Community Chat ═══ -->
+<div class="overlay-panel" id="overlayCrossChat">
+  <div class="overlay-box" style="width:520px">
+    <button class="overlay-close" onclick="App.closeOverlay('overlayCrossChat')">✕</button>
+    <div id="crossChatBody"></div>
+  </div>
+</div>
 
-// ══════════════════════════════════════════════════════════════
-//  TOAST
-// ══════════════════════════════════════════════════════════════
-function toast(msg){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), 2200);
-}
+<!-- Tooltip -->
+<div id="graphTooltip"></div>
 
-// ══════════════════════════════════════════════════════════════
-//  TAB SWITCHING
-// ══════════════════════════════════════════════════════════════
-document.querySelectorAll('.tab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
-  });
-});
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container"></div>
 
-// ══════════════════════════════════════════════════════════════
-//  FILE UPLOAD
-// ══════════════════════════════════════════════════════════════
-document.getElementById('file-input').addEventListener('change', e=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev=>{
-    try{
-      const data = JSON.parse(ev.target.result);
-      loadData(data);
-      toast('✓ Loaded '+file.name);
-    } catch(err){
-      toast('✗ Invalid JSON: '+err.message);
-    }
-  };
-  reader.readAsText(file);
-});
+<!-- JS Modules -->
+<script src="js/api.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/socket.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/app.js"></script>
 
-document.getElementById('load-demo-btn').addEventListener('click',()=>{
-  loadData(JSON.parse(JSON.stringify(DEMO_DATA)));
-  toast('✓ Demo dataset loaded');
-});
-
-// ══════════════════════════════════════════════════════════════
-//  THRESHOLD SLIDER
-// ══════════════════════════════════════════════════════════════
-document.getElementById('thresh-slider').addEventListener('input', e=>{
-  document.getElementById('thresh-display').textContent = parseFloat(e.target.value).toFixed(2);
-});
-
-// ══════════════════════════════════════════════════════════════
-//  MAIN LOAD
-// ══════════════════════════════════════════════════════════════
-function loadData(data){
-  state.data = data;
-  state.threshold = data.threshold;
-  document.getElementById('thresh-slider').value = data.threshold;
-  document.getElementById('thresh-display').textContent = data.threshold.toFixed(2);
-
-  updateStats(data);
-  buildCommList(data.communities);
-  buildGraph(data);
-  buildTable(data);
-  buildBenchmark(data);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  STATS
-// ══════════════════════════════════════════════════════════════
-function updateStats(d){
-  document.getElementById('stat-v').textContent  = d.vertices;
-  document.getElementById('stat-e').textContent  = d.edges;
-  document.getElementById('stat-c').textContent  = d.community_count;
-  document.getElementById('stat-t').textContent  = d.threshold.toFixed(2);
-  document.getElementById('stat-k').textContent  = d.kosaraju_us;
-  document.getElementById('stat-tj').textContent = d.tarjan_us;
-}
-
-// ══════════════════════════════════════════════════════════════
-//  COMMUNITY LIST (sidebar)
-// ══════════════════════════════════════════════════════════════
-function buildCommList(communities){
-  const el = document.getElementById('comm-list');
-  el.innerHTML = '';
-  communities.forEach(c=>{
-    const div = document.createElement('div');
-    div.className='comm-item';
-    div.dataset.id = c.id;
-    const col = commColor(c.id);
-    div.innerHTML = `
-      <div class="comm-item-header">
-        <span class="comm-name">Community #${c.id+1}</span>
-        <span class="comm-badge" style="background:${col}">${c.members.length} members</span>
-      </div>
-      <div class="comm-tag">🏷 ${c.dominant_interest}</div>
-      <div class="comm-members">${c.names.slice(0,3).join(', ')}${c.names.length>3?' ...':''}</div>`;
-    div.addEventListener('click',()=>selectCommunity(c.id));
-    el.appendChild(div);
-  });
-}
-
-function selectCommunity(id){
-  state.selectedComm = id;
-  document.querySelectorAll('.comm-item').forEach(el=>{
-    el.classList.toggle('active', parseInt(el.dataset.id)===id);
-  });
-  showDetailPanel(id);
-  // Switch to detail tab
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelector('[data-tab="detail"]').classList.add('active');
-  document.getElementById('panel-detail').classList.add('active');
-  // Highlight nodes
-  highlightCommunity(id);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  GRAPH VISUALISATION  (D3 force layout)
-// ══════════════════════════════════════════════════════════════
-let simulation = null;
-
-function buildGraph(data){
-  const svg = d3.select('#graph-svg');
-  svg.selectAll('*').remove();
-  document.getElementById('graph-empty').style.display='none';
-  document.getElementById('graph-svg').style.display='block';
-  document.getElementById('graph-legend').style.display='block';
-
-  const W = svg.node().clientWidth  || 800;
-  const H = svg.node().clientHeight || 500;
-
-  // Build membership map: userId → communityId
-  const userComm = {};
-  data.communities.forEach(c=>c.members.forEach(m=>{ userComm[m]=c.id; }));
-
-  // Nodes
-  const nodes = data.users.map(u=>({
-    id: u.id,
-    name: u.name,
-    comm: userComm[u.id] ?? -1,
-    interests: u.interests,
-    x: W/2 + (Math.random()-.5)*200,
-    y: H/2 + (Math.random()-.5)*200,
-  }));
-
-  // Links
-  const links = data.edges_list.map(e=>({source:e.from, target:e.to}));
-
-  // Arrow defs
-  const defs = svg.append('defs');
-  PALETTE.slice(0,data.communities.length+1).forEach((col,i)=>{
-    defs.append('marker')
-      .attr('id','arr'+i)
-      .attr('viewBox','0 -5 10 10').attr('refX',18).attr('refY',0)
-      .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
-      .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',col).attr('opacity',.7);
-  });
-
-  const layout = document.getElementById('layout-select').value;
-
-  // Container
-  const g = svg.append('g');
-
-  // Zoom
-  svg.call(d3.zoom().scaleExtent([.2,4]).on('zoom',e=>g.attr('transform',e.transform)));
-
-  // Position by layout
-  if(layout==='circle'){
-    const r = Math.min(W,H)*.38;
-    nodes.forEach((n,i)=>{
-      const a = (2*Math.PI*i)/nodes.length - Math.PI/2;
-      n.x = W/2 + r*Math.cos(a);
-      n.y = H/2 + r*Math.sin(a);
-      n.fx = n.x; n.fy = n.y;
-    });
-  } else if(layout==='cluster'){
-    // Group by community
-    const comms = [...new Set(nodes.map(n=>n.comm))];
-    const clusterR = Math.min(W,H)*.32;
-    const nodeR = Math.min(W,H)*.14;
-    nodes.forEach(n=>{
-      const ci = comms.indexOf(n.comm);
-      const ca = (2*Math.PI*ci)/comms.length - Math.PI/2;
-      const cx = W/2 + clusterR*Math.cos(ca);
-      const cy = H/2 + clusterR*Math.sin(ca);
-      const members = nodes.filter(x=>x.comm===n.comm);
-      const mi = members.indexOf(n);
-      const ma = (2*Math.PI*mi)/members.length;
-      n.fx = cx + nodeR*Math.cos(ma);
-      n.fy = cy + nodeR*Math.sin(ma);
-    });
-  }
-
-  // Links
-  const link = g.append('g').selectAll('line')
-    .data(links).join('line')
-    .attr('stroke', d=>{
-      const comm = userComm[d.source]??-1;
-      return commColor(comm);
-    })
-    .attr('stroke-width', 1.2)
-    .attr('stroke-opacity', .5)
-    .attr('marker-end', d=>`url(#arr${(userComm[d.source]??0)%PALETTE.length})`);
-
-  // Nodes
-  const node = g.append('g').selectAll('g')
-    .data(nodes).join('g')
-    .attr('cursor','pointer')
-    .call(d3.drag()
-      .on('start',(event,d)=>{ if(!event.active && simulation) simulation.alphaTarget(.3).restart(); d.fx=d.x;d.fy=d.y; })
-      .on('drag', (event,d)=>{ d.fx=event.x;d.fy=event.y; })
-      .on('end',  (event,d)=>{ if(!event.active && simulation) simulation.alphaTarget(0); d.fx=null;d.fy=null; })
-    );
-
-  node.append('circle')
-    .attr('r',18)
-    .attr('fill', d=>commColor(d.comm))
-    .attr('stroke','#fff').attr('stroke-width',2)
-    .attr('opacity',.92);
-
-  node.append('text')
-    .text(d=>d.name.charAt(0).toUpperCase())
-    .attr('text-anchor','middle').attr('dy','0.35em')
-    .attr('font-size',11).attr('font-weight','700')
-    .attr('fill','#fff').attr('pointer-events','none');
-
-  node.append('text')
-    .text(d=>d.name)
-    .attr('text-anchor','middle').attr('dy','2.6em')
-    .attr('font-size',9.5).attr('fill','#cdd').attr('pointer-events','none');
-
-  // Tooltip
-  const tooltip = document.getElementById('tooltip');
-  node
-    .on('mouseenter',(event,d)=>{
-      tooltip.style.display='block';
-      tooltip.innerHTML=`<strong>${d.name}</strong> (id:${d.id})<br>Community #${d.comm+1}<br>${d.interests.join(', ')}`;
-    })
-    .on('mousemove',event=>{
-      tooltip.style.left=(event.pageX+12)+'px';
-      tooltip.style.top =(event.pageY-10)+'px';
-    })
-    .on('mouseleave',()=>{ tooltip.style.display='none'; })
-    .on('click',(_,d)=>{ selectCommunity(d.comm); });
-
-  // Force sim (only for force layout)
-  if(layout==='force'){
-    simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id(d=>d.id).distance(90).strength(.5))
-      .force('charge', d3.forceManyBody().strength(-280))
-      .force('center', d3.forceCenter(W/2, H/2))
-      .force('collision', d3.forceCollide(26))
-      .on('tick',()=>{
-        link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
-            .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
-        node.attr('transform',d=>`translate(${d.x},${d.y})`);
-      });
-  } else {
-    // Static positions
-    link.attr('x1',d=>nodes[d.source].x ?? nodes.find(n=>n.id===d.source)?.x)
-        .attr('y1',d=>nodes[d.source].y ?? nodes.find(n=>n.id===d.source)?.y)
-        .attr('x2',d=>nodes[d.target].x ?? nodes.find(n=>n.id===d.target)?.x)
-        .attr('y2',d=>nodes[d.target].y ?? nodes.find(n=>n.id===d.target)?.y);
-    node.attr('transform',d=>`translate(${d.x},${d.y})`);
-  }
-
-  // Legend
-  const legendItems = document.getElementById('legend-items');
-  legendItems.innerHTML='';
-  data.communities.forEach(c=>{
-    legendItems.innerHTML+=`<div class="legend-row"><div class="legend-dot" style="background:${commColor(c.id)}"></div>Community #${c.id+1} (${c.members.length})</div>`;
-  });
-}
-
-function highlightCommunity(commId){
-  const svg = d3.select('#graph-svg');
-  svg.selectAll('circle')
-    .attr('opacity', d=> d && (d.comm===commId || commId===null) ? .95 : .2)
-    .attr('stroke-width', d=> d && d.comm===commId ? 3.5 : 2);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  USER TABLE
-// ══════════════════════════════════════════════════════════════
-function buildTable(data){
-  document.getElementById('table-empty').style.display='none';
-  document.getElementById('table-content').style.display='flex';
-
-  const userComm={};
-  data.communities.forEach(c=>c.members.forEach(m=>{userComm[m]=c.id;}));
-
-  const outDeg={};
-  data.edges_list.forEach(e=>{ outDeg[e.from]=(outDeg[e.from]||0)+1; });
-
-  const tbody = document.getElementById('user-tbody');
-  tbody.innerHTML='';
-  data.users.forEach(u=>{
-    const cid = userComm[u.id]??-1;
-    const col = cid>=0 ? commColor(cid) : '#94a3b8';
-    const tr = document.createElement('tr');
-    tr.innerHTML=`
-      <td><strong>${u.id}</strong></td>
-      <td><strong>${u.name}</strong></td>
-      <td><span class="comm-badge" style="background:${col}">#${cid+1}</span></td>
-      <td>${u.interests.map(i=>`<span class="tag-pill">${i}</span>`).join('')}</td>
-      <td style="text-align:center;font-weight:700;color:var(--teal)">${outDeg[u.id]||0}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-// ══════════════════════════════════════════════════════════════
-//  BENCHMARK PANEL
-// ══════════════════════════════════════════════════════════════
-function buildBenchmark(data){
-  document.getElementById('bench-empty').style.display='none';
-  document.getElementById('bench-content').style.display='block';
-
-  document.getElementById('k-time').textContent = data.kosaraju_us;
-  document.getElementById('t-time').textContent = data.tarjan_us;
-
-  // Bar chart
-  const maxT = Math.max(data.kosaraju_us, data.tarjan_us, 1);
-  const kPct = (data.kosaraju_us/maxT*100).toFixed(1);
-  const tPct = (data.tarjan_us /maxT*100).toFixed(1);
-
-  setTimeout(()=>{
-    const kb = document.getElementById('k-bar');
-    const tb = document.getElementById('t-bar');
-    kb.style.width = kPct+'%';
-    tb.style.width = tPct+'%';
-    kb.querySelector('span').textContent = data.kosaraju_us+'µs';
-    tb.querySelector('span').textContent = data.tarjan_us+'µs';
-    document.getElementById('k-bar-val').textContent = data.kosaraju_us+'µs';
-    document.getElementById('t-bar-val').textContent = data.tarjan_us+'µs';
-  }, 200);
-
-  // SCC size distribution bar chart (D3)
-  const svg = d3.select('#scc-dist-svg');
-  svg.selectAll('*').remove();
-  const W = svg.node().clientWidth || 600;
-  const H = 190;
-  const m = {top:20,right:20,bottom:40,left:40};
-  const iW = W-m.left-m.right, iH = H-m.top-m.bottom;
-
-  const commSizes = data.communities.map((c,i)=>({
-    label: 'C'+(i+1),
-    size: c.members.length,
-    color: commColor(c.id)
-  }));
-
-  const x = d3.scaleBand().domain(commSizes.map(d=>d.label)).range([0,iW]).padding(.25);
-  const y = d3.scaleLinear().domain([0, d3.max(commSizes,d=>d.size)+1]).range([iH,0]);
-
-  const g = svg.append('g').attr('transform',`translate(${m.left},${m.top})`);
-
-  g.append('g').attr('transform',`translate(0,${iH})`)
-    .call(d3.axisBottom(x))
-    .selectAll('text').style('fill','#64748b').style('font-size','11px');
-  g.append('g')
-    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('d')))
-    .selectAll('text').style('fill','#64748b').style('font-size','11px');
-
-  g.selectAll('.bar').data(commSizes).join('rect')
-    .attr('class','bar')
-    .attr('x', d=>x(d.label)).attr('y',iH)
-    .attr('width',x.bandwidth()).attr('height',0)
-    .attr('fill',d=>d.color).attr('rx',3)
-    .transition().duration(700).delay((_,i)=>i*80)
-    .attr('y',d=>y(d.size)).attr('height',d=>iH-y(d.size));
-
-  g.selectAll('.bar-lbl').data(commSizes).join('text')
-    .attr('class','bar-lbl')
-    .attr('x',d=>x(d.label)+x.bandwidth()/2).attr('y',iH-4)
-    .attr('text-anchor','middle').attr('fill','#475569').attr('font-size',11)
-    .text(d=>d.size)
-    .transition().duration(700).delay((_,i)=>i*80)
-    .attr('y',d=>y(d.size)-6);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  DETAIL PANEL
-// ══════════════════════════════════════════════════════════════
-function showDetailPanel(commId){
-  const data = state.data;
-  if(!data) return;
-  const c = data.communities.find(x=>x.id===commId);
-  if(!c) return;
-
-  document.getElementById('detail-empty').style.display='none';
-  const panel = document.getElementById('detail-content');
-  panel.style.display='block';
-  const col = commColor(c.id);
-
-  // Out-degrees
-  const outDeg={};
-  data.edges_list.forEach(e=>{ outDeg[e.from]=(outDeg[e.from]||0)+1; });
-
-  panel.innerHTML=`
-    <div class="detail-header" style="border-left:5px solid ${col}">
-      <div class="detail-title">Community #${c.id+1}</div>
-      <div class="detail-sub">Dominant Interest: ${c.dominant_interest} &nbsp;·&nbsp; Algorithm: Kosaraju / Tarjan (both agree)</div>
-    </div>
-    <div class="detail-grid">
-      <div class="detail-stat">
-        <div class="detail-stat-val" style="color:${col}">${c.members.length}</div>
-        <div class="detail-stat-label">Members</div>
-      </div>
-      <div class="detail-stat">
-        <div class="detail-stat-val" style="color:${col}">${(c.density*100).toFixed(0)}%</div>
-        <div class="detail-stat-label">Internal Density</div>
-      </div>
-      <div class="detail-stat">
-        <div class="detail-stat-val" style="color:${col}">${c.dominant_interest}</div>
-        <div class="detail-stat-label">Top Interest</div>
-      </div>
-    </div>
-    <div style="font-weight:700;font-size:.85rem;color:var(--dark);margin-bottom:.7rem">Members</div>
-    <div class="member-grid">
-      ${c.members.map((mid,i)=>{
-        const u = data.users.find(u=>u.id===mid);
-        if(!u) return '';
-        return `<div class="member-card" style="border-left-color:${col}">
-          <div class="member-name">${u.name}</div>
-          <div class="member-id">ID: ${u.id} &nbsp;·&nbsp; Out-degree: ${outDeg[u.id]||0}</div>
-          <div class="member-interests">${u.interests.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>
-        </div>`;
-      }).join('')}
-    </div>`;
-}
-
-// ══════════════════════════════════════════════════════════════
-//  APPLY BUTTON (re-filter by threshold — client-side approx)
-// ══════════════════════════════════════════════════════════════
-document.getElementById('apply-btn').addEventListener('click',()=>{
-  if(!state.data){ toast('Load data first'); return; }
-  const t = parseFloat(document.getElementById('thresh-slider').value);
-  toast(`Rebuilding graph at θ=${t.toFixed(2)} …`);
-  // Recompute edges client-side using Jaccard
-  const users = state.data.users;
-  const newEdges=[];
-  for(let i=0;i<users.length;i++){
-    for(let j=0;j<users.length;j++){
-      if(i===j) continue;
-      const A = new Set(users[i].interests);
-      const B = new Set(users[j].interests);
-      const inter = users[i].interests.filter(x=>B.has(x)).length;
-      const uni   = new Set([...A,...B]).size;
-      if(uni>0 && inter/uni >= t) newEdges.push({from:i,to:j});
-    }
-  }
-  // Re-run Kosaraju JS port to get new communities
-  const newComms = kosarajuJS(users.length, newEdges);
-  const modified = Object.assign({}, state.data, {
-    edges_list: newEdges,
-    edges: newEdges.length,
-    threshold: t,
-    communities: newComms,
-    community_count: newComms.length,
-    kosaraju_us: 'client',
-    tarjan_us: 'client',
-  });
-  loadData(modified);
-});
-
-// ══════════════════════════════════════════════════════════════
-//  KOSARAJU – JavaScript port (for client-side threshold changes)
-// ══════════════════════════════════════════════════════════════
-function kosarajuJS(V, edgeList){
-  const adj  = Array.from({length:V},()=>[]);
-  const radj = Array.from({length:V},()=>[]);
-  edgeList.forEach(e=>{ adj[e.from].push(e.to); radj[e.to].push(e.from); });
-
-  const visited = new Array(V).fill(false);
-  const stack   = [];
-
-  function dfs1(v){ visited[v]=true; for(const u of adj[v]) if(!visited[u]) dfs1(u); stack.push(v); }
-  function dfs2(v, comp){ visited[v]=true; comp.push(v); for(const u of radj[v]) if(!visited[u]) dfs2(u,comp); }
-
-  for(let i=0;i<V;i++) if(!visited[i]) dfs1(i);
-  visited.fill(false);
-  const sccs=[];
-  while(stack.length){
-    const v=stack.pop();
-    if(!visited[v]){ const c=[]; dfs2(v,c); sccs.push(c); }
-  }
-
-  // Build community objects matching backend format
-  // Need users from state for interests
-  const users = state.data?.users || [];
-  return sccs.map((members,i)=>{
-    const freq={};
-    members.forEach(mid=>{ (users[mid]?.interests||[]).forEach(t=>{ freq[t]=(freq[t]||0)+1; }); });
-    const dom = Object.entries(freq).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
-    const mset = new Set(members);
-    const internal = members.reduce((s,mid)=>s+(adj[mid]||[]).filter(nb=>mset.has(nb)).length,0);
-    const maxE = members.length*(members.length-1);
-    return {
-      id: i,
-      dominant_interest: dom,
-      density: maxE>0 ? internal/maxE : 0,
-      members,
-      names: members.map(m=>users[m]?.name||'User'+m),
-    };
-  });
-}
-
-// ══════════════════════════════════════════════════════════════
-//  INIT – auto-load demo
-// ══════════════════════════════════════════════════════════════
-window.addEventListener('load',()=>{
-  loadData(JSON.parse(JSON.stringify(DEMO_DATA)));
-});
-</script>
 </body>
 </html>

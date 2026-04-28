@@ -1,0 +1,2087 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "Mira D.",
+      "interests": [
+        "NLP",
+        "Computer Vision",
+        "Cloud",
+        "Databases",
+        "Data Structures"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Diya S.",
+      "interests": [
+        "Writing",
+        "Reading",
+        "Backend",
+        "Philosophy",
+        "Finance"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Riya P.",
+      "interests": [
+        "Mathematics",
+        "Physics",
+        "Quantum Computing",
+        "Painting",
+        "Writing"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Mira R.",
+      "interests": [
+        "Graphs",
+        "Algorithms",
+        "C++",
+        "Competitive Programming",
+        "Cloud"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Vihaan R.",
+      "interests": [
+        "Art",
+        "Painting",
+        "Gaming",
+        "Docker",
+        "Reading"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Uma R.",
+      "interests": [
+        "Python",
+        "ML",
+        "Frontend"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Isha R.",
+      "interests": [
+        "ML",
+        "Graphs",
+        "Algorithms",
+        "Philosophy",
+        "Photography"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Priya D.",
+      "interests": [
+        "Python",
+        "ML",
+        "Gaming"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Reyansh G.",
+      "interests": [
+        "Python",
+        "ML",
+        "Graphs",
+        "Web Development"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Dhruv C.",
+      "interests": [
+        "Finance",
+        "Investing",
+        "Compilers"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Varun G.",
+      "interests": [
+        "Docker",
+        "Kubernetes",
+        "Graphs"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Tanvi J.",
+      "interests": [
+        "Kubernetes",
+        "Blockchain",
+        "DevOps",
+        "Writing",
+        "Psychology"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Aditya D.",
+      "interests": [
+        "Deep Learning",
+        "NLP",
+        "Psychology",
+        "Docker",
+        "Writing"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Diya P.",
+      "interests": [
+        "Competitive Programming",
+        "Databases",
+        "Web Development",
+        "Reading",
+        "Research"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Sai S.",
+      "interests": [
+        "ML",
+        "Graphs",
+        "Frontend"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Ananya C.",
+      "interests": [
+        "Kubernetes",
+        "Blockchain",
+        "Finance",
+        "Physics"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Ananya S.",
+      "interests": [
+        "Mathematics",
+        "Physics",
+        "Systems",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Kiran J.",
+      "interests": [
+        "Reading",
+        "Gaming",
+        "Art",
+        "Algorithms"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Amit G.",
+      "interests": [
+        "Cloud",
+        "DevOps",
+        "Deep Learning"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Dev G.",
+      "interests": [
+        "Algorithms",
+        "C++",
+        "Competitive Programming"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Rishi M.",
+      "interests": [
+        "Cloud",
+        "DevOps",
+        "Docker",
+        "Finance",
+        "Psychology"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Aanya B.",
+      "interests": [
+        "Reading",
+        "Gaming",
+        "Psychology",
+        "NLP",
+        "Painting"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Varun V.",
+      "interests": [
+        "Data Structures",
+        "Competitive Programming",
+        "Web Development",
+        "Computer Vision"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Neha C.",
+      "interests": [
+        "Python",
+        "ML",
+        "Graphs",
+        "Finance"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Aanya R.",
+      "interests": [
+        "Painting",
+        "Philosophy",
+        "Psychology",
+        "Physics"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Dev C.",
+      "interests": [
+        "Competitive Programming",
+        "Databases",
+        "Compilers",
+        "Investing",
+        "Economics"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Jay R.",
+      "interests": [
+        "Databases",
+        "Web Development",
+        "JavaScript",
+        "Python"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Rahul J.",
+      "interests": [
+        "Graphs",
+        "Algorithms",
+        "C++",
+        "Data Structures"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Kiran B.",
+      "interests": [
+        "JavaScript",
+        "Frontend",
+        "Backend",
+        "Reading"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Tara R.",
+      "interests": [
+        "Competitive Programming",
+        "Databases",
+        "Web Development",
+        "Docker"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Raj J.",
+      "interests": [
+        "Music",
+        "Photography",
+        "Writing",
+        "NLP",
+        "Psychology"
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Varun P.",
+      "interests": [
+        "Economics",
+        "Mathematics",
+        "ML",
+        "Frontend"
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Meera R.",
+      "interests": [
+        "Physics",
+        "Quantum Computing",
+        "Research",
+        "NLP",
+        "Kubernetes"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Aditya V.",
+      "interests": [
+        "NLP",
+        "Computer Vision",
+        "Cloud",
+        "Research"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Reyansh R.",
+      "interests": [
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "Music"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Harsh P.",
+      "interests": [
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "Databases",
+        "Painting"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Amit R.",
+      "interests": [
+        "Art",
+        "Painting",
+        "Philosophy",
+        "Economics",
+        "Finance"
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Rishi M.",
+      "interests": [
+        "Painting",
+        "Philosophy",
+        "Psychology",
+        "Photography"
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Jay B.",
+      "interests": [
+        "Backend",
+        "Deep Learning",
+        "NLP",
+        "Blockchain"
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Rishi J.",
+      "interests": [
+        "Data Structures",
+        "Competitive Programming",
+        "Economics"
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Nisha R.",
+      "interests": [
+        "Docker",
+        "Kubernetes",
+        "DevOps",
+        "Photography"
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Rahul M.",
+      "interests": [
+        "Computer Vision",
+        "Cloud",
+        "Research",
+        "Quantum Computing",
+        "C++"
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Rishi M.",
+      "interests": [
+        "Research",
+        "Music",
+        "Photography",
+        "C++"
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Amit S.",
+      "interests": [
+        "C++",
+        "Data Structures",
+        "Competitive Programming",
+        "Gaming"
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Neel B.",
+      "interests": [
+        "Kubernetes",
+        "Blockchain",
+        "Web Development"
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Aarav I.",
+      "interests": [
+        "Python",
+        "ML",
+        "Graphs",
+        "Quantum Computing"
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Rohan P.",
+      "interests": [
+        "Reading",
+        "Gaming",
+        "Cloud",
+        "Docker"
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Meera D.",
+      "interests": [
+        "Blockchain",
+        "Finance",
+        "Investing",
+        "Algorithms",
+        "Philosophy"
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Raj M.",
+      "interests": [
+        "JavaScript",
+        "Frontend",
+        "Backend",
+        "Cloud",
+        "Systems"
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Pooja C.",
+      "interests": [
+        "Research",
+        "Music",
+        "Photography",
+        "Cloud"
+      ]
+    }
+  ],
+  "joinRequests": [],
+  "chatMessages": {
+    "1": [
+      {
+        "id": "msg_1777319994373_ieaoo9",
+        "userId": 0,
+        "userName": "Guest",
+        "text": "abcd",
+        "timestamp": "2026-04-27T19:59:54.373Z"
+      }
+    ]
+  },
+  "settings": {
+    "threshold": 0.3
+  },
+  "lastSccResult": {
+    "meta": {
+      "project": "Mind-Match",
+      "description": "SCC-based community detection",
+      "algorithm": "Kosaraju (canonical) + Tarjan (comparison)",
+      "validation_passed": true,
+      "version": "1.0"
+    },
+    "metrics": {
+      "vertices": 50,
+      "edges": 104,
+      "threshold": 0.3,
+      "community_count": 15,
+      "avg_community_size": 3.33,
+      "isolated_users": 0
+    },
+    "timings_microseconds": {
+      "kosaraju_us": 15,
+      "tarjan_us": 13,
+      "speedup_ratio": 1.15,
+      "faster_algorithm": "Tarjan"
+    },
+    "users": [
+      {
+        "id": 0,
+        "name": "Mira D.",
+        "interests": [
+          "Cloud",
+          "Computer Vision",
+          "Data Structures",
+          "Databases",
+          "NLP"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Diya S.",
+        "interests": [
+          "Backend",
+          "Finance",
+          "Philosophy",
+          "Reading",
+          "Writing"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Riya P.",
+        "interests": [
+          "Mathematics",
+          "Painting",
+          "Physics",
+          "Quantum Computing",
+          "Writing"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Mira R.",
+        "interests": [
+          "Algorithms",
+          "C++",
+          "Cloud",
+          "Competitive Programming",
+          "Graphs"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Vihaan R.",
+        "interests": [
+          "Art",
+          "Docker",
+          "Gaming",
+          "Painting",
+          "Reading"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Uma R.",
+        "interests": [
+          "Frontend",
+          "ML",
+          "Python"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Isha R.",
+        "interests": [
+          "Algorithms",
+          "Graphs",
+          "ML",
+          "Philosophy",
+          "Photography"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Priya D.",
+        "interests": [
+          "Gaming",
+          "ML",
+          "Python"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Reyansh G.",
+        "interests": [
+          "Graphs",
+          "ML",
+          "Python",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Dhruv C.",
+        "interests": [
+          "Compilers",
+          "Finance",
+          "Investing"
+        ]
+      },
+      {
+        "id": 10,
+        "name": "Varun G.",
+        "interests": [
+          "Docker",
+          "Graphs",
+          "Kubernetes"
+        ]
+      },
+      {
+        "id": 11,
+        "name": "Tanvi J.",
+        "interests": [
+          "Blockchain",
+          "DevOps",
+          "Kubernetes",
+          "Psychology",
+          "Writing"
+        ]
+      },
+      {
+        "id": 12,
+        "name": "Aditya D.",
+        "interests": [
+          "Deep Learning",
+          "Docker",
+          "NLP",
+          "Psychology",
+          "Writing"
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Diya P.",
+        "interests": [
+          "Competitive Programming",
+          "Databases",
+          "Reading",
+          "Research",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Sai S.",
+        "interests": [
+          "Frontend",
+          "Graphs",
+          "ML"
+        ]
+      },
+      {
+        "id": 15,
+        "name": "Ananya C.",
+        "interests": [
+          "Blockchain",
+          "Finance",
+          "Kubernetes",
+          "Physics"
+        ]
+      },
+      {
+        "id": 16,
+        "name": "Ananya S.",
+        "interests": [
+          "JavaScript",
+          "Mathematics",
+          "Physics",
+          "Systems"
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Kiran J.",
+        "interests": [
+          "Algorithms",
+          "Art",
+          "Gaming",
+          "Reading"
+        ]
+      },
+      {
+        "id": 18,
+        "name": "Amit G.",
+        "interests": [
+          "Cloud",
+          "Deep Learning",
+          "DevOps"
+        ]
+      },
+      {
+        "id": 19,
+        "name": "Dev G.",
+        "interests": [
+          "Algorithms",
+          "C++",
+          "Competitive Programming"
+        ]
+      },
+      {
+        "id": 20,
+        "name": "Rishi M.",
+        "interests": [
+          "Cloud",
+          "DevOps",
+          "Docker",
+          "Finance",
+          "Psychology"
+        ]
+      },
+      {
+        "id": 21,
+        "name": "Aanya B.",
+        "interests": [
+          "Gaming",
+          "NLP",
+          "Painting",
+          "Psychology",
+          "Reading"
+        ]
+      },
+      {
+        "id": 22,
+        "name": "Varun V.",
+        "interests": [
+          "Competitive Programming",
+          "Computer Vision",
+          "Data Structures",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 23,
+        "name": "Neha C.",
+        "interests": [
+          "Finance",
+          "Graphs",
+          "ML",
+          "Python"
+        ]
+      },
+      {
+        "id": 24,
+        "name": "Aanya R.",
+        "interests": [
+          "Painting",
+          "Philosophy",
+          "Physics",
+          "Psychology"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "Dev C.",
+        "interests": [
+          "Competitive Programming",
+          "Compilers",
+          "Databases",
+          "Economics",
+          "Investing"
+        ]
+      },
+      {
+        "id": 26,
+        "name": "Jay R.",
+        "interests": [
+          "Databases",
+          "JavaScript",
+          "Python",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 27,
+        "name": "Rahul J.",
+        "interests": [
+          "Algorithms",
+          "C++",
+          "Data Structures",
+          "Graphs"
+        ]
+      },
+      {
+        "id": 28,
+        "name": "Kiran B.",
+        "interests": [
+          "Backend",
+          "Frontend",
+          "JavaScript",
+          "Reading"
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Tara R.",
+        "interests": [
+          "Competitive Programming",
+          "Databases",
+          "Docker",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 30,
+        "name": "Raj J.",
+        "interests": [
+          "Music",
+          "NLP",
+          "Photography",
+          "Psychology",
+          "Writing"
+        ]
+      },
+      {
+        "id": 31,
+        "name": "Varun P.",
+        "interests": [
+          "Economics",
+          "Frontend",
+          "ML",
+          "Mathematics"
+        ]
+      },
+      {
+        "id": 32,
+        "name": "Meera R.",
+        "interests": [
+          "Kubernetes",
+          "NLP",
+          "Physics",
+          "Quantum Computing",
+          "Research"
+        ]
+      },
+      {
+        "id": 33,
+        "name": "Aditya V.",
+        "interests": [
+          "Cloud",
+          "Computer Vision",
+          "NLP",
+          "Research"
+        ]
+      },
+      {
+        "id": 34,
+        "name": "Reyansh R.",
+        "interests": [
+          "DevOps",
+          "Docker",
+          "Kubernetes",
+          "Music"
+        ]
+      },
+      {
+        "id": 35,
+        "name": "Harsh P.",
+        "interests": [
+          "Databases",
+          "DevOps",
+          "Docker",
+          "Kubernetes",
+          "Painting"
+        ]
+      },
+      {
+        "id": 36,
+        "name": "Amit R.",
+        "interests": [
+          "Art",
+          "Economics",
+          "Finance",
+          "Painting",
+          "Philosophy"
+        ]
+      },
+      {
+        "id": 37,
+        "name": "Rishi M.",
+        "interests": [
+          "Painting",
+          "Philosophy",
+          "Photography",
+          "Psychology"
+        ]
+      },
+      {
+        "id": 38,
+        "name": "Jay B.",
+        "interests": [
+          "Backend",
+          "Blockchain",
+          "Deep Learning",
+          "NLP"
+        ]
+      },
+      {
+        "id": 39,
+        "name": "Rishi J.",
+        "interests": [
+          "Competitive Programming",
+          "Data Structures",
+          "Economics"
+        ]
+      },
+      {
+        "id": 40,
+        "name": "Nisha R.",
+        "interests": [
+          "DevOps",
+          "Docker",
+          "Kubernetes",
+          "Photography"
+        ]
+      },
+      {
+        "id": 41,
+        "name": "Rahul M.",
+        "interests": [
+          "C++",
+          "Cloud",
+          "Computer Vision",
+          "Quantum Computing",
+          "Research"
+        ]
+      },
+      {
+        "id": 42,
+        "name": "Rishi M.",
+        "interests": [
+          "C++",
+          "Music",
+          "Photography",
+          "Research"
+        ]
+      },
+      {
+        "id": 43,
+        "name": "Amit S.",
+        "interests": [
+          "C++",
+          "Competitive Programming",
+          "Data Structures",
+          "Gaming"
+        ]
+      },
+      {
+        "id": 44,
+        "name": "Neel B.",
+        "interests": [
+          "Blockchain",
+          "Kubernetes",
+          "Web Development"
+        ]
+      },
+      {
+        "id": 45,
+        "name": "Aarav I.",
+        "interests": [
+          "Graphs",
+          "ML",
+          "Python",
+          "Quantum Computing"
+        ]
+      },
+      {
+        "id": 46,
+        "name": "Rohan P.",
+        "interests": [
+          "Cloud",
+          "Docker",
+          "Gaming",
+          "Reading"
+        ]
+      },
+      {
+        "id": 47,
+        "name": "Meera D.",
+        "interests": [
+          "Algorithms",
+          "Blockchain",
+          "Finance",
+          "Investing",
+          "Philosophy"
+        ]
+      },
+      {
+        "id": 48,
+        "name": "Raj M.",
+        "interests": [
+          "Backend",
+          "Cloud",
+          "Frontend",
+          "JavaScript",
+          "Systems"
+        ]
+      },
+      {
+        "id": 49,
+        "name": "Pooja C.",
+        "interests": [
+          "Cloud",
+          "Music",
+          "Photography",
+          "Research"
+        ]
+      }
+    ],
+    "edges_list": [
+      {
+        "from": 0,
+        "to": 33
+      },
+      {
+        "from": 3,
+        "to": 19
+      },
+      {
+        "from": 3,
+        "to": 27
+      },
+      {
+        "from": 4,
+        "to": 17
+      },
+      {
+        "from": 4,
+        "to": 21
+      },
+      {
+        "from": 4,
+        "to": 46
+      },
+      {
+        "from": 5,
+        "to": 7
+      },
+      {
+        "from": 5,
+        "to": 8
+      },
+      {
+        "from": 5,
+        "to": 14
+      },
+      {
+        "from": 5,
+        "to": 23
+      },
+      {
+        "from": 5,
+        "to": 31
+      },
+      {
+        "from": 5,
+        "to": 45
+      },
+      {
+        "from": 6,
+        "to": 14
+      },
+      {
+        "from": 7,
+        "to": 5
+      },
+      {
+        "from": 7,
+        "to": 8
+      },
+      {
+        "from": 7,
+        "to": 23
+      },
+      {
+        "from": 7,
+        "to": 45
+      },
+      {
+        "from": 8,
+        "to": 5
+      },
+      {
+        "from": 8,
+        "to": 7
+      },
+      {
+        "from": 8,
+        "to": 14
+      },
+      {
+        "from": 8,
+        "to": 23
+      },
+      {
+        "from": 8,
+        "to": 26
+      },
+      {
+        "from": 8,
+        "to": 45
+      },
+      {
+        "from": 9,
+        "to": 25
+      },
+      {
+        "from": 9,
+        "to": 47
+      },
+      {
+        "from": 10,
+        "to": 34
+      },
+      {
+        "from": 10,
+        "to": 35
+      },
+      {
+        "from": 10,
+        "to": 40
+      },
+      {
+        "from": 11,
+        "to": 44
+      },
+      {
+        "from": 12,
+        "to": 30
+      },
+      {
+        "from": 13,
+        "to": 29
+      },
+      {
+        "from": 14,
+        "to": 5
+      },
+      {
+        "from": 14,
+        "to": 6
+      },
+      {
+        "from": 14,
+        "to": 8
+      },
+      {
+        "from": 14,
+        "to": 23
+      },
+      {
+        "from": 14,
+        "to": 31
+      },
+      {
+        "from": 14,
+        "to": 45
+      },
+      {
+        "from": 15,
+        "to": 44
+      },
+      {
+        "from": 17,
+        "to": 4
+      },
+      {
+        "from": 17,
+        "to": 46
+      },
+      {
+        "from": 18,
+        "to": 20
+      },
+      {
+        "from": 19,
+        "to": 3
+      },
+      {
+        "from": 19,
+        "to": 27
+      },
+      {
+        "from": 19,
+        "to": 43
+      },
+      {
+        "from": 20,
+        "to": 18
+      },
+      {
+        "from": 21,
+        "to": 4
+      },
+      {
+        "from": 22,
+        "to": 29
+      },
+      {
+        "from": 22,
+        "to": 39
+      },
+      {
+        "from": 22,
+        "to": 43
+      },
+      {
+        "from": 23,
+        "to": 5
+      },
+      {
+        "from": 23,
+        "to": 7
+      },
+      {
+        "from": 23,
+        "to": 8
+      },
+      {
+        "from": 23,
+        "to": 14
+      },
+      {
+        "from": 23,
+        "to": 45
+      },
+      {
+        "from": 24,
+        "to": 37
+      },
+      {
+        "from": 25,
+        "to": 9
+      },
+      {
+        "from": 25,
+        "to": 39
+      },
+      {
+        "from": 26,
+        "to": 8
+      },
+      {
+        "from": 26,
+        "to": 29
+      },
+      {
+        "from": 27,
+        "to": 3
+      },
+      {
+        "from": 27,
+        "to": 19
+      },
+      {
+        "from": 27,
+        "to": 43
+      },
+      {
+        "from": 28,
+        "to": 48
+      },
+      {
+        "from": 29,
+        "to": 13
+      },
+      {
+        "from": 29,
+        "to": 22
+      },
+      {
+        "from": 29,
+        "to": 26
+      },
+      {
+        "from": 30,
+        "to": 12
+      },
+      {
+        "from": 31,
+        "to": 5
+      },
+      {
+        "from": 31,
+        "to": 14
+      },
+      {
+        "from": 33,
+        "to": 0
+      },
+      {
+        "from": 33,
+        "to": 41
+      },
+      {
+        "from": 33,
+        "to": 49
+      },
+      {
+        "from": 34,
+        "to": 10
+      },
+      {
+        "from": 34,
+        "to": 35
+      },
+      {
+        "from": 34,
+        "to": 40
+      },
+      {
+        "from": 35,
+        "to": 10
+      },
+      {
+        "from": 35,
+        "to": 34
+      },
+      {
+        "from": 35,
+        "to": 40
+      },
+      {
+        "from": 37,
+        "to": 24
+      },
+      {
+        "from": 39,
+        "to": 22
+      },
+      {
+        "from": 39,
+        "to": 25
+      },
+      {
+        "from": 39,
+        "to": 43
+      },
+      {
+        "from": 40,
+        "to": 10
+      },
+      {
+        "from": 40,
+        "to": 34
+      },
+      {
+        "from": 40,
+        "to": 35
+      },
+      {
+        "from": 41,
+        "to": 33
+      },
+      {
+        "from": 42,
+        "to": 49
+      },
+      {
+        "from": 43,
+        "to": 19
+      },
+      {
+        "from": 43,
+        "to": 22
+      },
+      {
+        "from": 43,
+        "to": 27
+      },
+      {
+        "from": 43,
+        "to": 39
+      },
+      {
+        "from": 44,
+        "to": 11
+      },
+      {
+        "from": 44,
+        "to": 15
+      },
+      {
+        "from": 45,
+        "to": 5
+      },
+      {
+        "from": 45,
+        "to": 7
+      },
+      {
+        "from": 45,
+        "to": 8
+      },
+      {
+        "from": 45,
+        "to": 14
+      },
+      {
+        "from": 45,
+        "to": 23
+      },
+      {
+        "from": 46,
+        "to": 4
+      },
+      {
+        "from": 46,
+        "to": 17
+      },
+      {
+        "from": 47,
+        "to": 9
+      },
+      {
+        "from": 48,
+        "to": 28
+      },
+      {
+        "from": 49,
+        "to": 33
+      },
+      {
+        "from": 49,
+        "to": 42
+      }
+    ],
+    "communities": [
+      {
+        "id": 0,
+        "size": 1,
+        "dominant_interest": "Backend",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 4,
+        "members": [
+          38
+        ],
+        "names": [
+          "Jay B."
+        ]
+      },
+      {
+        "id": 1,
+        "size": 1,
+        "dominant_interest": "Art",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 5,
+        "members": [
+          36
+        ],
+        "names": [
+          "Amit R."
+        ]
+      },
+      {
+        "id": 2,
+        "size": 1,
+        "dominant_interest": "Kubernetes",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 5,
+        "members": [
+          32
+        ],
+        "names": [
+          "Meera R."
+        ]
+      },
+      {
+        "id": 3,
+        "size": 2,
+        "dominant_interest": "Backend",
+        "density": 1,
+        "internal_edges": 2,
+        "unique_interests": 6,
+        "members": [
+          28,
+          48
+        ],
+        "names": [
+          "Kiran B.",
+          "Raj M."
+        ]
+      },
+      {
+        "id": 4,
+        "size": 2,
+        "dominant_interest": "Painting",
+        "density": 1,
+        "internal_edges": 2,
+        "unique_interests": 5,
+        "members": [
+          24,
+          37
+        ],
+        "names": [
+          "Aanya R.",
+          "Rishi M."
+        ]
+      },
+      {
+        "id": 5,
+        "size": 2,
+        "dominant_interest": "Cloud",
+        "density": 1,
+        "internal_edges": 2,
+        "unique_interests": 6,
+        "members": [
+          18,
+          20
+        ],
+        "names": [
+          "Amit G.",
+          "Rishi M."
+        ]
+      },
+      {
+        "id": 6,
+        "size": 1,
+        "dominant_interest": "JavaScript",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 4,
+        "members": [
+          16
+        ],
+        "names": [
+          "Ananya S."
+        ]
+      },
+      {
+        "id": 7,
+        "size": 2,
+        "dominant_interest": "NLP",
+        "density": 1,
+        "internal_edges": 2,
+        "unique_interests": 7,
+        "members": [
+          12,
+          30
+        ],
+        "names": [
+          "Aditya D.",
+          "Raj J."
+        ]
+      },
+      {
+        "id": 8,
+        "size": 3,
+        "dominant_interest": "Blockchain",
+        "density": 0.6667,
+        "internal_edges": 4,
+        "unique_interests": 8,
+        "members": [
+          11,
+          44,
+          15
+        ],
+        "names": [
+          "Tanvi J.",
+          "Neel B.",
+          "Ananya C."
+        ]
+      },
+      {
+        "id": 9,
+        "size": 4,
+        "dominant_interest": "Docker",
+        "density": 1,
+        "internal_edges": 12,
+        "unique_interests": 8,
+        "members": [
+          10,
+          34,
+          35,
+          40
+        ],
+        "names": [
+          "Varun G.",
+          "Reyansh R.",
+          "Harsh P.",
+          "Nisha R."
+        ]
+      },
+      {
+        "id": 10,
+        "size": 4,
+        "dominant_interest": "Gaming",
+        "density": 0.6667,
+        "internal_edges": 8,
+        "unique_interests": 9,
+        "members": [
+          4,
+          17,
+          46,
+          21
+        ],
+        "names": [
+          "Vihaan R.",
+          "Kiran J.",
+          "Rohan P.",
+          "Aanya B."
+        ]
+      },
+      {
+        "id": 11,
+        "size": 20,
+        "dominant_interest": "Competitive Programming",
+        "density": 0.1684,
+        "internal_edges": 64,
+        "unique_interests": 26,
+        "members": [
+          3,
+          19,
+          27,
+          43,
+          22,
+          29,
+          13,
+          26,
+          8,
+          5,
+          7,
+          23,
+          14,
+          6,
+          31,
+          45,
+          39,
+          25,
+          9,
+          47
+        ],
+        "names": [
+          "Mira R.",
+          "Dev G.",
+          "Rahul J.",
+          "Amit S.",
+          "Varun V.",
+          "Tara R.",
+          "Diya P.",
+          "Jay R.",
+          "Reyansh G.",
+          "Uma R.",
+          "Priya D.",
+          "Neha C.",
+          "Sai S.",
+          "Isha R.",
+          "Varun P.",
+          "Aarav I.",
+          "Rishi J.",
+          "Dev C.",
+          "Dhruv C.",
+          "Meera D."
+        ]
+      },
+      {
+        "id": 12,
+        "size": 1,
+        "dominant_interest": "Mathematics",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 5,
+        "members": [
+          2
+        ],
+        "names": [
+          "Riya P."
+        ]
+      },
+      {
+        "id": 13,
+        "size": 1,
+        "dominant_interest": "Backend",
+        "density": 0,
+        "internal_edges": 0,
+        "unique_interests": 5,
+        "members": [
+          1
+        ],
+        "names": [
+          "Diya S."
+        ]
+      },
+      {
+        "id": 14,
+        "size": 5,
+        "dominant_interest": "Cloud",
+        "density": 0.4,
+        "internal_edges": 8,
+        "unique_interests": 10,
+        "members": [
+          0,
+          33,
+          41,
+          49,
+          42
+        ],
+        "names": [
+          "Mira D.",
+          "Aditya V.",
+          "Rahul M.",
+          "Pooja C.",
+          "Rishi M."
+        ]
+      }
+    ]
+  },
+  "sccDirty": false,
+  "eventLog": [
+    {
+      "type": "merge",
+      "message": "Communities #4 + #5 merged → Community #5 (25 members)",
+      "timestamp": "2026-04-27T20:12:43.005Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 10 users (total: 33)",
+      "timestamp": "2026-04-27T20:12:43.007Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 10 users (total: 43)",
+      "timestamp": "2026-04-27T20:13:36.906Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #3 + #4 + #5 + #6 merged → Community #5 (88 members)",
+      "timestamp": "2026-04-27T20:13:43.672Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 50 users (total: 93)",
+      "timestamp": "2026-04-27T20:13:43.674Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 100)",
+      "timestamp": "2026-04-27T20:14:27.567Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 107)",
+      "timestamp": "2026-04-27T20:14:30.598Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 114)",
+      "timestamp": "2026-04-27T20:14:33.582Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 5 users (total: 119)",
+      "timestamp": "2026-04-27T20:14:36.568Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #4 + #5 merged → Community #3 (124 members)",
+      "timestamp": "2026-04-27T20:14:39.727Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 126)",
+      "timestamp": "2026-04-27T20:14:39.728Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 6 users (total: 132)",
+      "timestamp": "2026-04-27T20:14:42.586Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 139)",
+      "timestamp": "2026-04-27T20:14:45.583Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 129)",
+      "timestamp": "2026-04-27T20:17:45.728Z"
+    },
+    {
+      "type": "split",
+      "message": "Community #3 split into 2 groups (#4, #5)",
+      "timestamp": "2026-04-27T20:17:46.682Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 119)",
+      "timestamp": "2026-04-27T20:17:46.685Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 109)",
+      "timestamp": "2026-04-27T20:17:47.584Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 99)",
+      "timestamp": "2026-04-27T20:17:48.682Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 99 users (total: 0)",
+      "timestamp": "2026-04-27T20:17:50.747Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 0 users (total: 0)",
+      "timestamp": "2026-04-27T20:17:52.528Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #4 + #5 merged → Community #4 (97 members)",
+      "timestamp": "2026-04-27T20:17:54.825Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 100 users (total: 100)",
+      "timestamp": "2026-04-27T20:17:54.828Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 100 users (total: 0)",
+      "timestamp": "2026-04-27T20:17:58.038Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 5 users (total: 5)",
+      "timestamp": "2026-04-27T20:17:58.810Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 12)",
+      "timestamp": "2026-04-27T20:18:01.811Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 5 users (total: 17)",
+      "timestamp": "2026-04-27T20:18:04.810Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #7 + #8 merged → Community #7 (6 members)",
+      "timestamp": "2026-04-27T20:18:07.815Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 5 users (total: 22)",
+      "timestamp": "2026-04-27T20:18:07.816Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 6 users (total: 28)",
+      "timestamp": "2026-04-27T20:18:10.809Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 4 users (total: 32)",
+      "timestamp": "2026-04-27T20:18:13.828Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 3 users (total: 35)",
+      "timestamp": "2026-04-27T20:18:16.814Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 4 users (total: 39)",
+      "timestamp": "2026-04-27T20:18:19.820Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 6 users (total: 45)",
+      "timestamp": "2026-04-27T20:18:22.808Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #6 + #9 merged → Community #8 (18 members)",
+      "timestamp": "2026-04-27T20:18:25.813Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 52)",
+      "timestamp": "2026-04-27T20:18:25.814Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #4 + #8 merged → Community #6 (27 members)",
+      "timestamp": "2026-04-27T20:18:28.820Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 7 users (total: 59)",
+      "timestamp": "2026-04-27T20:18:28.821Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 3 users (total: 62)",
+      "timestamp": "2026-04-27T20:18:31.810Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #6 + #7 + #8 merged → Community #7 (60 members)",
+      "timestamp": "2026-04-27T20:20:50.427Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 10 users (total: 72)",
+      "timestamp": "2026-04-27T20:20:50.428Z"
+    },
+    {
+      "type": "split",
+      "message": "Community #7 split into 2 groups (#6, #7)",
+      "timestamp": "2026-04-27T20:20:54.481Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 50 users (total: 22)",
+      "timestamp": "2026-04-27T20:20:54.483Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 12)",
+      "timestamp": "2026-04-27T20:20:57.598Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 2)",
+      "timestamp": "2026-04-27T20:21:00.006Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 2 users (total: 0)",
+      "timestamp": "2026-04-27T20:21:00.518Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 10 users (total: 30)",
+      "timestamp": "2026-04-28T05:06:07.702Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #6 + #9 merged → Community #8 (21 members)",
+      "timestamp": "2026-04-28T05:07:52.444Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 10 users (total: 40)",
+      "timestamp": "2026-04-28T05:07:52.446Z"
+    },
+    {
+      "type": "split",
+      "message": "Community #8 split into 2 groups (#6, #9)",
+      "timestamp": "2026-04-28T05:07:54.839Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 10 users (total: 30)",
+      "timestamp": "2026-04-28T05:07:54.843Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 3 users (total: 34)",
+      "timestamp": "2026-04-28T05:10:27.945Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #7 + #9 merged → Community #9 (18 members)",
+      "timestamp": "2026-04-28T05:10:30.928Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 5 users (total: 39)",
+      "timestamp": "2026-04-28T05:10:30.931Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #8 + #9 merged → Community #8 (28 members)",
+      "timestamp": "2026-04-28T05:10:33.951Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 3 users (total: 42)",
+      "timestamp": "2026-04-28T05:10:33.954Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 42 users (total: 0)",
+      "timestamp": "2026-04-28T09:29:57.237Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #7 + #8 merged → Community #10 (4 members)",
+      "timestamp": "2026-04-28T09:29:58.327Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #6 + #8 merged → Community #12 (20 members)",
+      "timestamp": "2026-04-28T09:29:58.330Z"
+    },
+    {
+      "type": "split",
+      "message": "Community #8 split into 6 groups (#6, #9, #10, #11, #12, #15)",
+      "timestamp": "2026-04-28T09:29:58.335Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 50 users (total: 50)",
+      "timestamp": "2026-04-28T09:29:58.339Z"
+    },
+    {
+      "type": "merge",
+      "message": "Communities #4 + #5 + #6 + #8 + #9 + #10 + #11 + #12 + #15 merged → Community #1 (150 members)",
+      "timestamp": "2026-04-28T09:29:59.699Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Added 100 users (total: 150)",
+      "timestamp": "2026-04-28T09:29:59.704Z"
+    },
+    {
+      "type": "split",
+      "message": "Community #1 split into 9 groups (#4, #5, #6, #8, #9, #10, #11, #12, #15)",
+      "timestamp": "2026-04-28T09:31:39.072Z"
+    },
+    {
+      "type": "simulate",
+      "message": "Removed 100 users (total: 50)",
+      "timestamp": "2026-04-28T09:31:39.075Z"
+    }
+  ]
+}
